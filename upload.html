@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+            <script src="<{HTTPROOT}>plugins/common/jquery.js"></script>
+            <link rel="stylesheet" href="<{HTTPROOT}>plugins/layui/css/layui.css">
+            <script type="text/javascript" src="<{HTTPROOT}>plugins/layui/layui.js"></script>
+            <script type="text/javascript" src="<{HTTPROOT}>plugins/layer/layer.js"></script>
+            <title>发布商品</title>
+	</head>
+  <style>
+    body{font-size:62.5%;font-family: 微软雅黑;}
+    .layui-input{height:1.6rem;width:13rem;float: left;margin-right: 0.2rem;}
+    .layui-form-item span{line-height: 1.5rem; float: left; display: inline-block;width:3.2rem}
+    .layui-form-item b{line-height: 1.5rem;float: left;font-weight: 500;}
+    .layui-form-item {width: 18rem;margin: 0 auto;margin-top: 0.8rem;}
+    .layui-form-item .add-image{max-width:4rem;max-height: 3.2rem;}
+    .layui-form-item .picture-item{width:4rem;height: 3.2rem;display: inline-block;margin: 0.1rem;overflow: hidden;}
+    .layui-form-item .input-picture{max-width:4rem}
+    .select-goods{display: block;width: 4rem;height:1.5rem;float: left;margin-right: 0.4rem}
+    .select-class{display: block;width: 4.5rem;height:1.5rem;margin-bottom:0.8rem;}
+    .container {width: 13.3rem;height: 100%;float: left;}
+    .upload-photo {width: 13rem;height: 100%;padding: 0.1rem;overflow: auto;clear: both;}
+    .upload-photo img {width: 3.8rem;height: 3.5rem;}
+    .upload-addImg {float: left;margin-right: 0.2rem;margin-bottom: 0.2rem}
+    .upload-file {width: 3.6rem;height: 3.2rem;background: url("<{TEMPLE}>/images/z_add.png") no-repeat;background-size: 100% 100%;border:0.1rem solid #ddd;float: left;margin-right: 0.2rem;}
+    .upload-file input::-webkit-file-upload-button {
+        width: 1rem;
+        height: 1rem;
+        border: none;
+        position: absolute;
+        outline: 0;
+        opacity: 0;
+        }
+
+        .upload-file input#file {
+        display: block;
+        width: auto;
+        border: 0;
+        vertical-align: middle;
+        }
+        /*遮罩层*/
+
+        .upload-mask {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        display: none;
+        }
+
+        .upload-alert {
+        width: 13rem;
+        height: 7rem;
+        border-radius: .2rem;
+        background: #fff;
+        font-size: .24rem;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -6.5rem;
+        margin-top: -4rem;
+        }
+
+        .upload-alert p:nth-child(1) {
+        line-height: 5.2rem;
+        }
+
+        .upload-alert p:nth-child(2) span {
+        display: inline-block;
+        width: 49%;
+        height: 1.6rem;
+        line-height: 1.5rem;
+        float: left;
+        border-top: 1px solid #ddd;
+        }
+
+        .upload-cancel {
+        border-right: 1px solid #ddd;
+        }
+  </style>
+  <body>
+        <form class="layui-form" action="" name="myform" style="padding:0 0 2rem 0">
+            <div class="layui-form-item" style="margin-top:1.5rem">
+                <b style="color:red">*</b><span style="margin-right:1rem">商品名称:</span> <input type="text" name="goodName" id="" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <b style="color:red">*</b><span style="margin-right:1rem">商品货号:</span> <input type="text" name="goodName" id="" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <b style="color:red">*</b><span style="margin-right:1rem">商品分类:</span>
+                 <select name="" id="" style="display:block" class="select-goods">
+                     <option value="进口车">进口车</option>
+                     <option value="国产车">国产车</option>
+                 </select>
+                 <select name="" id="" style="display:block" class="select-goods">
+                     <option value="车辆">车辆</option>
+                     <option value="摩托车">摩托车</option>
+                 </select>
+                 <select name="" id="" style="display:block" class="select-goods">
+                     <option value="复古车">复古车</option>
+                     <option value="轿车">轿车</option>
+                     <option value="suv">suv</option>
+                     <option value="越野车">越野车</option>
+                 </select>
+            </div>
+            <div class="layui-form-item" style="width:13rem;">
+                <span style="margin-right:2rem">商品属性:</span>
+                <b style="margin-right:0.5rem">缸数</b>
+                <select name="" id="" style="display:block" class="select-class">
+                    <option value="单杠">单杠</option>
+                </select>
+                <span style="margin-right:2rem">&nbsp;</span>
+                <b style="margin-right:0.5rem">冷却</b>
+                <select name="" id="" style="display:block" class="select-class">
+                    <option value="水冷">水冷</option>
+                </select>
+                <span style="margin-right:2rem">&nbsp;</span>
+                <b style="margin-right:0.5rem">供油</b>
+                <select name="" id="" style="display:block" class="select-class">
+                    <option value="化油器">化油器</option>
+                </select>
+                <span style="margin-right:2rem">&nbsp;</span>
+                <b style="margin-right:0.5rem">年份</b>
+                <select name="" id="" style="display:block" class="select-class">
+                    <option value="2018">2018</option>
+                </select>
+                <span style="margin-right:2rem">&nbsp;</span>
+                <b style="margin-right:0.5rem">排量</b>
+                <select name="" id="" style="display:block" class="select-class">
+                    <option value="110">110</option>
+                </select>
+            </div>
+            <div class="layui-form-item">
+                <b style="color:red">*</b><span style="margin-right:1rem">商品品牌:</span> 
+                <select name="" id="" style="display:block;" class="select-class" >
+                    <option value="大茂摩托今年大卖">大茂摩托今年大卖</option>
+                </select>
+            </div>
+            <div class="layui-form-item">
+                <b style="color:red">*</b><span style="margin-right:1rem">出售价:</span> 
+                <input type="text" name="goodName" id="" class="layui-input" style="width:7rem"><span>元</span>
+            </div>
+            <div class="layui-form-item">
+                <b style="color:red">*</b><span style="margin-right:1rem">市场价:</span> 
+                <input type="text" name="goodName" id="" class="layui-input" style="width:7rem"><span>元</span>
+            </div>
+            <div class="layui-form-item">
+                <b style="color:red">*</b><span style="margin-right:1rem">库存数量:</span> 
+                <input type="text" name="goodName" id="" class="layui-input" style="width:5rem">
+            </div>
+            <div class="layui-form-item">
+                <b style="color:red">*</b><span style="margin-right:1rem">商品详情描述:</span>
+                <textarea name="" id="" cols="30" rows="7" style="resize:none;overflow:auto"></textarea>
+            </div>
+            <div class="layui-form-item">
+                <b style="color:red">*</b><span style="margin-right:1rem">商品图片:</span>
+         
+                <div class="container">
+                    <!--    照片添加    -->
+                    <div class="upload-photo">
+                        <div class="upload-file">
+                            <input type="file" name="file" id="file" value="" style="opacity:0;width:3rem;height:3rem" accept="image/*" multiple onchange="imgChange('upload-photo','upload-file');" />
+                        </div>
+                    </div>
+                    <!--遮罩层-->
+                    <div class="upload-mask">
+                        <!--弹出框-->
+                        <div class="upload-alert">
+                            <p>确定要删除这张图片吗？</p>
+                            <p>
+                                <span class="upload-cancel">取消</span>
+                                <span class="upload-sure">确定</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item" style="text-align:center">
+                <p style="text-align:center;font-size:0.875rem">最多上传9张图片</p>
+            </div>
+            <div class="layui-form-item" style="text-align:center">
+                <input type="button" class="layui-btn layui-btn-normal bind-button" name="img" multiple="multiple" value="发布商品" style="margin-top:2.5rem;width:17rem;border-radius:0.4rem" >
+            </div>
+        </form> 
+        <script>
+
+        function imgChange(obj1, obj2) {
+            //获取点击的文本框
+            var file = document.getElementById("file");
+            //存放图片的父级元素
+            var imgContainer = document.getElementsByClassName(obj1)[0];
+            //获取的图片文件
+            var fileList = file.files;
+            if(fileList.length >9 || (parseInt($(".upload-addImg").length)+parseInt(fileList.length))>9){
+                layer.msg('不能超过九张照片');
+                return false;
+            }
+            //文本框的父级元素
+            var input = document.getElementsByClassName(obj2)[0];
+            var imgArr = [];
+            //遍历获取到得图片文件
+            for (var i = 0; i < fileList.length; i++) {
+                var imgUrl = window.URL.createObjectURL(file.files[i]);
+                imgArr.push(imgUrl);
+                var img = document.createElement("img");
+                img.setAttribute("src", imgArr[i]);
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "upload-addImg");
+                imgAdd.prepend(img);
+                imgContainer.prepend(imgAdd);
+            };
+            imgRemove();
+        };
+
+        function imgRemove() {
+            var imgList = document.getElementsByClassName("upload-addImg");  
+            var mask = document.getElementsByClassName("upload-mask")[0];
+            var cancel = document.getElementsByClassName("upload-cancel")[0];
+            var sure = document.getElementsByClassName("upload-sure")[0];
+            for (var j = 0; j < imgList.length; j++) {
+                imgList[j].index = j;
+                imgList[j].onclick = function() {
+                    var t = this;
+                    mask.style.display = "block";
+                    cancel.onclick = function() {
+                        mask.style.display = "none";
+                    };
+                    sure.onclick = function() {
+                        mask.style.display = "none";
+                        t.style.display = "none";
+                        t.remove();
+                    };
+                }
+            };
+        };
+        </script>
+	</body>
+</html>
